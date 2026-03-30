@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find /Users/shawn/proj/mypetstop -type f \\\\\\(-name *.pdf -o -name *.docx -o -name *.xlsx -o -name *.xls -o -name *.md \\\\\\))",
+      "Bash(grep -r \"puppeteer\\\\|playwright\\\\|wkhtmltopdf\\\\|pdf\\\\|PDF\" /Users/shawn/proj/mypetstop/business --include=*.md --include=*.json --include=*.js --include=*.ts)",
+      "Bash(grep -r \"puppeteer\\\\|playwright\\\\|wkhtmltopdf\\\\|pdf\\\\|PDF\" /Users/shawn/proj/mypetstop/client-pack --include=*.md --include=*.json --include=*.js --include=*.ts)",
+      "Bash(uv run:*)"
+    ]
+  }
+}
