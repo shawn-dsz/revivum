@@ -1,0 +1,50 @@
+---
+import type { GhostPage } from '../../lib/ghost';
+
+interface Props {
+  page: GhostPage | null;
+}
+
+const { page } = Astro.props;
+
+const headline = page?.title ?? 'Regulated Access to Emerging Therapies.';
+const subheading =
+  page?.excerpt ??
+  'Revivum provides the infrastructure that connects patients and practitioners to lawful, GMP-quality peptide-based therapeutics in Australia \u2014 safely, compliantly, and with pharmacist-led clinical support.';
+---
+
+<section class="bg-[color:var(--color-parchment)]">
+  <div class="mx-auto max-w-4xl px-6 py-16 md:py-24">
+    <p class="font-mono eyebrow text-xs tracking-widest uppercase text-[color:var(--color-muted)] mb-4">
+      Healthcare Infrastructure &middot; Australia
+    </p>
+    <h1 class="font-serif text-4xl md:text-5xl leading-tight mb-6 text-[color:var(--color-ink)] max-w-2xl">
+      {
+        headline === 'Regulated Access to Emerging Therapies.' ? (
+          <>
+            Regulated Access to <em>Emerging Therapies.</em>
+          </>
+        ) : (
+          headline
+        )
+      }
+    </h1>
+    <p class="text-base text-[color:var(--color-muted)] max-w-2xl leading-relaxed mb-8">
+      {subheading}
+    </p>
+    <div class="flex flex-wrap gap-3 mb-10">
+      <a href="/patients/" class="btn btn-primary font-mono text-[11px] tracking-wider">
+        I&rsquo;m a Patient &rarr;
+      </a>
+      <a href="/practitioners/" class="btn btn-outline font-mono text-[11px] tracking-wider">
+        I&rsquo;m a Practitioner &rarr;
+      </a>
+    </div>
+    <div class="max-w-lg border border-[color:var(--color-rule)] rounded-lg px-5 py-4 bg-[color:var(--color-fog)]">
+      <p class="text-sm text-[color:var(--color-muted)] leading-relaxed">
+        This website contains general health information only. It does not promote therapeutic goods or constitute
+        medical advice. Always consult a registered healthcare practitioner.
+      </p>
+    </div>
+  </div>
+</section>

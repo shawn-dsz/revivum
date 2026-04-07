@@ -1,0 +1,61 @@
+---
+// No Ghost props — copy is entirely hard-coded for this section.
+---
+
+<section class="bg-[color:var(--color-white)]">
+  <div class="mx-auto max-w-4xl px-6 py-16 md:py-24">
+    <p class="font-mono eyebrow text-xs tracking-widest uppercase text-[color:var(--color-muted)] mb-4">
+      Who Is This For?
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Patient card -->
+      <div
+        class="rounded-xl border p-8 flex flex-col gap-4"
+        style="background-color: var(--color-bg-p); border-color: #B8D9C4;"
+      >
+        <span
+          class="font-mono text-[10px] tracking-widest uppercase font-bold"
+          style="color: var(--color-label-p);"
+        >
+          For Patients
+        </span>
+        <h3 class="font-serif text-2xl md:text-3xl leading-snug text-[color:var(--color-ink)]">
+          Curious About Emerging Therapies?
+        </h3>
+        <p class="text-base text-[color:var(--color-muted)] leading-relaxed">
+          Learn what peptide-based therapies are and how to access them lawfully through a registered Australian
+          practitioner.
+        </p>
+        <a href="/patients/" class="btn btn-primary btn-sm font-mono text-[11px] tracking-wider self-start mt-auto">
+          Learn More &rarr;
+        </a>
+      </div>
+
+      <!-- Practitioner card -->
+      <div
+        class="rounded-xl border p-8 flex flex-col gap-4"
+        style="background-color: var(--color-bg-dr); border-color: #B8C4D9;"
+      >
+        <span
+          class="font-mono text-[10px] tracking-widest uppercase font-bold"
+          style="color: var(--color-label-dr);"
+        >
+          For Practitioners
+        </span>
+        <h3 class="font-serif text-2xl md:text-3xl leading-snug text-[color:var(--color-ink)]">
+          Ready to Expand Your Practice?
+        </h3>
+        <p class="text-base text-[color:var(--color-muted)] leading-relaxed">
+          Join our network and access GMP supply, TGA pathway support, and pharmacist-led clinical guidance.
+        </p>
+        <a
+          href="/practitioners/"
+          class="btn btn-sm font-mono text-[11px] tracking-wider self-start mt-auto text-white"
+          style="background-color: var(--color-label-dr); border-color: var(--color-label-dr);"
+        >
+          Join the Network &rarr;
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
