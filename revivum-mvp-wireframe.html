@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Revivum — Phase 1 MVP Wireframe</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&family=Courier+Prime:wght@400;700&display=swap');
+
+:root {
+  --ink:#0F1A14;--moss:#3A5C47;--moss-lt:#5A7D69;--fog:#F4F1EC;--parchment:#EDE8DF;
+  --white:#FAFAF8;--rule:#D9D4CC;--muted:#8A8478;--label-p:#2E5C48;--label-dr:#2C3E6B;
+  --bg-p:#EAF2EC;--bg-dr:#EAEEf6;--amber:#B87333;--red:#922;--green:#2E6B3E;
+  --sidebar-w:220px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--ink);color:var(--white);display:flex;height:100vh;overflow:hidden;}
+
+/* SIDEBAR */
+#sidebar{width:var(--sidebar-w);min-width:var(--sidebar-w);background:#0A1310;border-right:1px solid rgba(255,255,255,0.06);display:flex;flex-direction:column;overflow-y:auto;}
+.sb-logo{padding:22px 18px 18px;border-bottom:1px solid rgba(255,255,255,0.06);}
+.sb-logo .mark{font-family:'Playfair Display',serif;font-size:18px;letter-spacing:0.03em;color:#fff;}
+.sb-logo .sub{font-size:9px;color:#4A7C6F;text-transform:uppercase;letter-spacing:0.18em;margin-top:3px;font-family:'Courier Prime',monospace;}
+.sb-section{padding:14px 10px 6px;}
+.sb-label{font-size:8.5px;text-transform:uppercase;letter-spacing:0.18em;color:#4A5A50;padding:0 8px;margin-bottom:4px;font-family:'Courier Prime',monospace;}
+.nav-btn{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:5px;cursor:pointer;font-size:12px;color:rgba(255,255,255,0.5);transition:all 0.12s;margin-bottom:1px;user-select:none;}
+.nav-btn:hover{background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.85);}
+.nav-btn.active{background:var(--moss);color:#fff;}
+.nav-btn .pip{width:5px;height:5px;border-radius:50%;background:currentColor;opacity:0.5;flex-shrink:0;}
+.nav-btn.active .pip{opacity:1;}
+.nav-tag{margin-left:auto;font-size:8px;background:rgba(255,255,255,0.1);padding:1px 5px;border-radius:3px;text-transform:uppercase;letter-spacing:0.08em;font-family:'Courier Prime',monospace;}
+
+/* MAIN */
+#main{flex:1;overflow-y:auto;background:#EFECEA;scroll-behavior:smooth;}
+
+/* TOPBAR */
+.topbar{position:sticky;top:0;z-index:10;background:var(--white);border-bottom:1px solid var(--rule);padding:12px 28px;display:flex;align-items:center;gap:12px;}
+.topbar-title{font-size:13px;font-weight:600;color:var(--ink);}
+.topbar-meta{font-size:11px;color:var(--muted);margin-left:auto;}
+.chip{display:inline-flex;align-items:center;gap:4px;font-size:9px;font-weight:600;padding:3px 8px;border-radius:20px;text-transform:uppercase;letter-spacing:0.1em;font-family:'Courier Prime',monospace;}
+.chip-both{background:var(--parchment);color:var(--amber);}
+.chip-pt{background:var(--bg-p);color:var(--label-p);}
+.chip-dr{background:var(--bg-dr);color:var(--label-dr);}
+.chip-strat{background:#F3E8F0;color:#6A2C5A;}
+
+/* PAGE */
+.pg{display:none;}.pg.active{display:block;}
+.shell{max-width:860px;margin:0 auto;padding:28px 28px 60px;}
+
+/* PAGE HEADER */
+.ph{margin-bottom:24px;}
+.ph .ey{font-size:9px;text-transform:uppercase;letter-spacing:0.2em;color:var(--moss);font-family:'Courier Prime',monospace;margin-bottom:6px;}
+.ph h1{font-family:'Playfair Display',serif;font-size:26px;color:var(--ink);line-height:1.2;margin-bottom:8px;}
+.ph p{font-size:13px;color:#555;max-width:580px;line-height:1.65;}
+
+/* WIREFRAME CARD */
+.wf-card{background:var(--white);border-radius:10px;overflow:hidden;border:1px solid var(--rule);box-shadow:0 2px 12px rgba(0,0,0,0.06);margin-bottom:28px;}
+
+/* MOCK NAV */
+.mock-nav{background:var(--ink);padding:12px 22px;display:flex;align-items:center;justify-content:space-between;}
+.mock-logo{width:72px;height:10px;background:rgba(255,255,255,0.35);border-radius:3px;}
+.mock-links{display:flex;gap:16px;}
+.mock-link{width:42px;height:7px;background:rgba(255,255,255,0.2);border-radius:2px;}
+.mock-cta{padding:6px 14px;background:var(--moss);border-radius:4px;font-size:8.5px;font-family:'Courier Prime',monospace;color:#fff;letter-spacing:0.06em;}
+
+/* SECTIONS */
+.ws{border-bottom:1px solid #E8E3DB;padding:22px 24px;position:relative;}
+.ws:last-child{border-bottom:none;}
+.ws-stone{background:var(--fog);}
+.ws-dark{background:var(--ink);}
+.ws-green{background:#EAF2EC;}
+.ws-parchment{background:var(--parchment);}
+.sec-tag{position:absolute;top:8px;right:12px;font-size:8px;font-family:'Courier Prime',monospace;color:#B0A898;text-transform:uppercase;letter-spacing:0.12em;}
+
+/* TYPOGRAPHY */
+.ey-sm{font-size:8.5px;text-transform:uppercase;letter-spacing:0.18em;color:var(--moss);font-family:'Courier Prime',monospace;margin-bottom:7px;}
+.ey-white{font-size:8.5px;text-transform:uppercase;letter-spacing:0.18em;color:#5A9A80;font-family:'Courier Prime',monospace;margin-bottom:7px;}
+.h1w{font-family:'Playfair Display',serif;font-size:22px;color:var(--ink);line-height:1.3;margin-bottom:8px;}
+.h1w-white{font-family:'Playfair Display',serif;font-size:22px;color:#fff;line-height:1.3;margin-bottom:8px;}
+.h2w{font-family:'Playfair Display',serif;font-size:16px;color:var(--ink);line-height:1.35;margin-bottom:6px;}
+.h3w{font-size:12px;font-weight:600;color:var(--ink);margin-bottom:4px;}
+.body-sm{font-size:11px;color:#5A5248;line-height:1.65;max-width:520px;}
+.body-sm-white{font-size:11px;color:rgba(255,255,255,0.55);line-height:1.65;max-width:520px;}
+
+/* BUTTONS */
+.btns{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;}
+.btn{padding:9px 18px;border-radius:4px;font-size:9.5px;font-weight:600;font-family:'Courier Prime',monospace;letter-spacing:0.06em;text-transform:uppercase;cursor:default;display:inline-flex;align-items:center;}
+.btn-primary{background:var(--moss);color:#fff;}
+.btn-outline{border:1.5px solid var(--ink);color:var(--ink);}
+.btn-outline-w{border:1.5px solid rgba(255,255,255,0.4);color:#fff;}
+.btn-white{background:#fff;color:var(--ink);}
+.btn-dr{background:#2C3E6B;color:#fff;}
+
+/* SPLIT CARDS */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px;}
+.split-pt{background:var(--bg-p);border:1.5px solid #B8D9C4;border-radius:7px;padding:18px;}
+.split-dr{background:var(--bg-dr);border:1.5px solid #B8C4D9;border-radius:7px;padding:18px;}
+.split-tag{font-size:8px;text-transform:uppercase;letter-spacing:0.18em;font-family:'Courier Prime',monospace;margin-bottom:8px;}
+.split-tag-p{color:var(--label-p);}
+.split-tag-dr{color:var(--label-dr);}
+
+/* TRUST BAR */
+.trust-bar{display:flex;gap:20px;flex-wrap:wrap;align-items:center;padding:12px 24px;background:var(--white);border-bottom:1px solid var(--rule);}
+.ti{display:flex;align-items:center;gap:5px;font-size:9.5px;color:var(--muted);font-weight:500;}
+.ti-icon{width:14px;height:14px;background:#D4CFC8;border-radius:3px;flex-shrink:0;}
+
+/* GRIDS */
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px;}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:14px;}
+.gcard{background:var(--fog);border:1px solid var(--rule);border-radius:6px;padding:14px;}
+.gcard-white{background:#fff;border:1px solid var(--rule);border-radius:6px;padding:16px;}
+.gicon{width:28px;height:28px;background:rgba(58,92,71,0.12);border-radius:5px;margin-bottom:9px;display:flex;align-items:center;justify-content:center;font-size:13px;}
+
+/* STEPS */
+.steps{display:flex;align-items:flex-start;gap:0;margin-top:16px;}
+.step{flex:1;text-align:center;padding:0 6px;position:relative;}
+.step:not(:last-child)::after{content:'→';position:absolute;right:-8px;top:13px;font-size:12px;color:var(--moss-lt);}
+.step-n{width:28px;height:28px;border-radius:50%;background:var(--moss);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 7px;}
+.step-l{font-size:10px;font-weight:600;color:var(--ink);margin-bottom:3px;}
+.step-s{font-size:9px;color:var(--muted);line-height:1.4;}
+
+/* FORM */
+.wf-form{margin-top:14px;}
+.ff-row{display:flex;gap:8px;margin-bottom:8px;}
+.ff{flex:1;height:34px;background:var(--fog);border:1.5px solid var(--rule);border-radius:4px;padding:0 10px;font-size:10px;color:var(--muted);font-family:'Courier Prime',monospace;display:flex;align-items:center;}
+.ff.tall{height:60px;align-items:flex-start;padding-top:8px;}
+
+/* CALLOUTS */
+.comp-box{background:#FEF8E8;border:1px solid #E8D090;border-left:3px solid var(--amber);border-radius:4px;padding:10px 14px;margin-top:10px;font-size:9.5px;color:#7A5C20;line-height:1.6;}
+.info-box{background:var(--bg-p);border:1px solid #B8D9C4;border-left:3px solid var(--moss);border-radius:4px;padding:10px 14px;margin-top:10px;font-size:9.5px;color:#2E5C48;line-height:1.6;}
+.ann{font-size:9.5px;color:#9A9288;font-family:'Courier Prime',monospace;margin-top:8px;padding-left:10px;border-left:2px solid #D4CFC8;line-height:1.6;}
+
+/* FOOTER */
+.mock-footer{background:var(--ink);padding:20px 24px;display:grid;grid-template-columns:2fr 1fr 1fr;gap:20px;}
+.fc-title{font-size:8px;text-transform:uppercase;letter-spacing:0.18em;color:#5A9A80;font-family:'Courier Prime',monospace;margin-bottom:8px;}
+.fc-line{height:7px;background:rgba(255,255,255,0.12);border-radius:2px;margin-bottom:5px;}
+.disclaimer{background:#0A1310;padding:10px 24px;font-size:8.5px;color:rgba(255,255,255,0.25);line-height:1.6;border-top:1px solid rgba(255,255,255,0.05);}
+
+/* STRATEGY */
+.s-panel{background:var(--white);border:1px solid var(--rule);border-radius:8px;padding:20px;margin-bottom:16px;}
+.avoid{color:#922;font-weight:500;}
+.use{color:#2E6B3E;font-weight:500;}
+table.msg{width:100%;border-collapse:collapse;font-size:11px;}
+table.msg th{background:var(--ink);color:#fff;padding:8px 14px;text-align:left;font-size:9px;text-transform:uppercase;letter-spacing:0.12em;}
+table.msg td{padding:9px 14px;border-bottom:1px solid var(--rule);vertical-align:top;line-height:1.55;}
+table.msg tr:last-child td{border-bottom:none;}
+table.msg tr:nth-child(even) td{background:var(--fog);}
+.field-badge{display:inline-block;font-size:9px;padding:2px 7px;border-radius:3px;font-family:'Courier Prime',monospace;margin:2px;}
+.fb-req{background:var(--bg-p);color:var(--label-p);}
+.fb-opt{background:var(--parchment);color:var(--amber);}
+hr.div{border:none;border-top:1px solid var(--rule);margin:20px 0;}
+
+/* OVERVIEW */
+.ov-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px;}
+.ov-card{background:var(--white);border:1px solid var(--rule);border-radius:7px;padding:18px;cursor:pointer;transition:all 0.14s;}
+.ov-card:hover{border-color:var(--moss);box-shadow:0 3px 10px rgba(0,0,0,0.07);transform:translateY(-2px);}
+.ov-num{font-family:'Playfair Display',serif;font-size:26px;color:var(--moss);margin-bottom:4px;}
+.ov-card h3{font-size:12px;font-weight:600;color:var(--ink);margin-bottom:4px;}
+.ov-card p{font-size:10px;color:var(--muted);line-height:1.5;}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px;}
+.stat{background:var(--white);border:1px solid var(--rule);border-radius:6px;padding:14px;text-align:center;}
+.stat-v{font-family:'Playfair Display',serif;font-size:22px;color:var(--ink);}
+.stat-l{font-size:9px;color:var(--muted);margin-top:2px;}
+
+/* SITEMAP */
+.sm-row{display:flex;gap:10px;margin-bottom:14px;}
+.sm-node{flex:1;background:var(--fog);border:1.5px solid var(--rule);border-radius:6px;padding:10px 12px;font-size:11px;font-weight:500;color:var(--ink);cursor:pointer;transition:all 0.12s;}
+.sm-node:hover{border-color:var(--moss);background:var(--bg-p);}
+.sm-node.sm-home{background:var(--ink);color:#fff;border-color:var(--ink);text-align:center;max-width:200px;margin:0 auto;}
+.sm-node.sm-pt{background:var(--bg-p);border-color:#B8D9C4;}
+.sm-node.sm-dr{background:var(--bg-dr);border-color:#B8C4D9;}
+.sm-sub{font-size:8.5px;color:var(--muted);margin-top:2px;font-family:'Courier Prime',monospace;}
+.sm-node.sm-home .sm-sub{color:rgba(255,255,255,0.4);}
+.sm-node.sm-pt .sm-sub{color:var(--moss);}
+.sm-node.sm-dr .sm-sub{color:var(--label-dr);}
+.sm-con{text-align:center;color:var(--moss-lt);font-size:18px;margin:-5px 0;}
+.removed{background:#FDE8E8;border:1px solid #F0B8B8;border-radius:5px;padding:10px 14px;font-size:10px;color:#922;margin-top:8px;line-height:1.6;}
+</style>
+</head>
+<body>
+
+<div id="sidebar">
+  <div class="sb-logo">
+    <div class="mark">Revivum</div>
+    <div class="sub">Phase 1 MVP · Wireframe</div>
+  </div>
+  <div class="sb-section">
+    <div class="sb-label">Strategy</div>
+    <div class="nav-btn active" onclick="go('ov',this)"><div class="pip"></div>Overview</div>
+    <div class="nav-btn" onclick="go('sitemap',this)"><div class="pip"></div>Sitemap (4 pages)</div>
+    <div class="nav-btn" onclick="go('cta',this)"><div class="pip"></div>CTA & Lead Capture</div>
+  </div>
+  <div class="sb-section">
+    <div class="sb-label">Wireframes</div>
+    <div class="nav-btn" onclick="go('home',this)"><div class="pip"></div>Homepage <span class="nav-tag">Router</span></div>
+    <div class="nav-btn" onclick="go('patient',this)"><div class="pip"></div>For Patients <span class="nav-tag">1 Page</span></div>
+    <div class="nav-btn" onclick="go('doctor',this)"><div class="pip"></div>For Practitioners <span class="nav-tag">1 Page</span></div>
+    <div class="nav-btn" onclick="go('about',this)"><div class="pip"></div>About <span class="nav-tag">Opt.</span></div>
+  </div>
+  <div class="sb-section">
+    <div class="sb-label">What's Removed</div>
+    <div style="padding:8px 10px;font-size:9.5px;color:#5A5248;line-height:1.9;">
+      ❌ Eligibility quiz<br>❌ Clinic finder<br>❌ Patient journey flow<br>❌ Booking / triage<br>❌ Practitioner portal<br>❌ CME resources<br>❌ Product naming
+    </div>
+  </div>
+</div>
+
+<div id="main">
+
+<!-- OVERVIEW -->
+<div class="pg active" id="pg-ov">
+  <div class="topbar"><div class="topbar-title">Revivum Phase 1 MVP</div><div class="topbar-meta">4 Pages · Webflow-buildable · 1–2 days</div></div>
+  <div class="shell">
+    <div class="ph"><div class="ey">Phase 1 MVP — Wireframe Document</div><h1>Minimum Viable Credibility</h1><p>Stripped back to what matters: capture patient and practitioner interest, establish regulated credibility, and funnel both audiences to a single "Join the Network" action. Buildable in 1–2 days on Webflow.</p></div>
+    <div class="stats">
+      <div class="stat"><div class="stat-v">4</div><div class="stat-l">Pages Max</div></div>
+      <div class="stat"><div class="stat-v">1</div><div class="stat-l">Core CTA</div></div>
+      <div class="stat"><div class="stat-v">2</div><div class="stat-l">Audiences</div></div>
+      <div class="stat"><div class="stat-v">TGA</div><div class="stat-l">Compliant</div></div>
+    </div>
+    <div class="ov-grid">
+      <div class="ov-card" onclick="go('sitemap',null)"><div class="ov-num">01</div><h3>Sitemap</h3><p>4-page architecture. Homepage routes both audiences to their single pages.</p></div>
+      <div class="ov-card" onclick="go('home',null)"><div class="ov-num">02</div><h3>Homepage</h3><p>Trust signals, mission, audience split. Routes to /patients and /practitioners.</p></div>
+      <div class="ov-card" onclick="go('patient',null)"><div class="ov-num">03</div><h3>For Patients</h3><p>High-level education → 3-step process → single lead capture form. Nothing clinical.</p></div>
+      <div class="ov-card" onclick="go('doctor',null)"><div class="ov-num">04</div><h3>For Practitioners</h3><p>Credibility pitch → infrastructure overview → sign-up form. Low friction.</p></div>
+      <div class="ov-card" onclick="go('cta',null)"><div class="ov-num">05</div><h3>CTA Strategy</h3><p>Field-level lead capture design, framing language, and compliance annotations.</p></div>
+      <div class="ov-card" onclick="go('about',null)"><div class="ov-num">06</div><h3>About (Optional)</h3><p>Mission statement. TGA registration. Short, credible, trust-building. 3 sections only.</p></div>
+    </div>
+    <hr class="div">
+    <div class="s-panel">
+      <div class="ey-sm" style="margin-bottom:10px;">Design Philosophy for This Stage</div>
+      <div class="grid3">
+        <div class="gcard"><div class="gicon">🌱</div><div class="h3w">Capture First</div><div class="body-sm" style="max-width:none;">Build the lead list before building the product. Every page points to one action.</div></div>
+        <div class="gcard"><div class="gicon">🏛</div><div class="h3w">Credibility Over Content</div><div class="body-sm" style="max-width:none;">TGA registration, GMP supply, pharmacist-led — 3 trust signals are enough. Don't over-explain.</div></div>
+        <div class="gcard"><div class="gicon">⚖️</div><div class="h3w">Minimum Regulatory Exposure</div><div class="body-sm" style="max-width:none;">Less content = fewer compliance risks. Say less, disclaim well, position correctly.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SITEMAP -->
+<div class="pg" id="pg-sitemap">
+  <div class="topbar"><div class="topbar-title">Sitemap</div><span class="chip chip-both">4 Pages Max</span></div>
+  <div class="shell">
+    <div class="ph"><div class="ey">Architecture</div><h1>4-Page Sitemap</h1><p>Everything routes through the homepage. No sub-pages, no portals, no directories. Both core pages end with a lead capture form.</p></div>
+    <div class="s-panel">
+      <div style="display:flex;justify-content:center;margin-bottom:10px;">
+        <div class="sm-node sm-home" onclick="go('home',null)">🏠 Homepage<div class="sm-sub">Trust · Router · Mission</div></div>
+      </div>
+      <div class="sm-con">┬</div>
+      <div class="sm-row" style="margin-top:6px;">
+        <div class="sm-node sm-pt" onclick="go('patient',null)">/patients — For Patients<div class="sm-sub">Education → 3 steps → Lead form</div></div>
+        <div class="sm-node sm-dr" onclick="go('doctor',null)">/practitioners — For Practitioners<div class="sm-sub">Value prop → Infrastructure → Sign-up form</div></div>
+        <div class="sm-node" onclick="go('about',null)">/about — About *(Optional)*<div class="sm-sub">Mission · TGA reg. · Who we are</div></div>
+      </div>
+      <hr class="div">
+      <div class="ey-sm" style="margin-bottom:10px;">Also Required (Utility)</div>
+      <div class="sm-row">
+        <div class="sm-node" style="font-size:10px;">Privacy Policy<div class="sm-sub">Legal requirement</div></div>
+        <div class="sm-node" style="font-size:10px;">Terms of Use<div class="sm-sub">Legal requirement</div></div>
+        <div class="sm-node" style="font-size:10px;background:#FDE8E8;border-color:#F0B8B8;">TGA Disclaimer — Footer (Every Page)<div class="sm-sub" style="color:#922;">Mandatory</div></div>
+      </div>
+      <hr class="div">
+      <div class="removed">❌ <strong>Removed from Phase 1:</strong> Eligibility quiz · Clinic finder / directory · Booking flows · Patient journey multi-step · Practitioner portal / resources · Product-specific pages · Clinical detail pages</div>
+    </div>
+    <div class="s-panel">
+      <div class="ey-sm" style="margin-bottom:10px;">Navigation Structure</div>
+      <div style="font-size:11px;color:#444;line-height:1.9;">
+        <strong>Desktop nav:</strong> Logo &nbsp;/&nbsp; For Patients &nbsp;/&nbsp; For Practitioners &nbsp;/&nbsp; About &nbsp;/&nbsp; <kbd style="background:#EAF2EC;padding:1px 7px;border-radius:3px;font-size:10px;color:var(--moss);">Join the Network →</kbd><br>
+        <strong>Mobile nav:</strong> Hamburger → same links stacked. CTA button sticky at bottom.<br>
+        <strong>Rule:</strong> No dropdown menus. No mega-nav. Flat and simple.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA STRATEGY -->
+<div class="pg" id="pg-cta">
+  <div class="topbar"><div class="topbar-title">CTA & Lead Capture Strategy</div><span class="chip chip-strat">Strategy</span></div>
+  <div class="shell">
+    <div class="ph"><div class="ey">Conversion Design</div><h1>One CTA. Two Forms.</h1><p>The entire site drives toward a single action. Slightly different fields per audience — same CTA label, different routing internally.</p></div>
+    <div class="grid2">
+      <div class="s-panel" style="border-top:3px solid var(--moss);">
+        <div class="ey-sm" style="color:var(--label-p);">Patient Lead Form</div>
+        <div class="h2w" style="font-size:14px;margin-bottom:10px;">Join the Waitlist</div>
+        <div style="font-size:10px;color:var(--muted);margin-bottom:14px;">Framing: <em>"Register your interest and we'll connect you with a practitioner in our network."</em></div>
+        <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:14px;">
+          <div><span class="field-badge fb-req">First Name *</span><span class="field-badge fb-req">Last Name *</span></div>
+          <div><span class="field-badge fb-req">Email Address *</span></div>
+          <div><span class="field-badge fb-req">Phone Number *</span></div>
+          <div><span class="field-badge fb-req">State / Territory *</span></div>
+          <div><span class="field-badge fb-opt">How did you hear about us? (optional)</span></div>
+          <div><span class="field-badge fb-opt">Anything you'd like us to know? (optional)</span></div>
+        </div>
+        <div class="info-box" style="margin-top:0;margin-bottom:12px;"><strong>Consent copy (required):</strong> "By submitting this form, I confirm I am seeking general information and understand that Revivum is not a medical provider. I consent to being contacted by a member of the Revivum team."</div>
+        <div class="btn btn-primary" style="font-size:9px;">Register My Interest →</div>
+        <div class="ann" style="margin-top:10px;">↳ Tagged [Patient Lead] internally. Routed to internal triage → referred to network practitioner manually at Phase 1.</div>
+      </div>
+      <div class="s-panel" style="border-top:3px solid #2C3E6B;">
+        <div class="ey-sm" style="color:var(--label-dr);">Practitioner Sign-Up Form</div>
+        <div class="h2w" style="font-size:14px;margin-bottom:10px;">Join the Network</div>
+        <div style="font-size:10px;color:var(--muted);margin-bottom:14px;">Framing: <em>"Apply to join our practitioner network. AHPRA-registered doctors only. We'll be in touch within 48 hours."</em></div>
+        <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:14px;">
+          <div><span class="field-badge fb-req">First Name *</span><span class="field-badge fb-req">Last Name *</span></div>
+          <div><span class="field-badge fb-req">AHPRA Registration No. *</span></div>
+          <div><span class="field-badge fb-req">Medical Specialty *</span></div>
+          <div><span class="field-badge fb-req">Work Email *</span></div>
+          <div><span class="field-badge fb-req">State / Territory *</span></div>
+          <div><span class="field-badge fb-opt">Practice / Clinic Name (optional)</span></div>
+        </div>
+        <div style="background:var(--bg-dr);border:1px solid #B8C4D9;border-radius:4px;padding:10px 12px;font-size:9.5px;color:#2C3E6B;margin-bottom:12px;line-height:1.7;"><strong>Consent copy:</strong> "I confirm I am currently registered with AHPRA. I understand membership is subject to verification. I consent to being contacted by Revivum."</div>
+        <div class="btn btn-dr" style="font-size:9px;">Apply to Join →</div>
+        <div class="ann" style="margin-top:10px;">↳ Tagged [Practitioner Lead]. AHPRA verified manually at Phase 1. CRM entry created. 48hr follow-up email triggered.</div>
+      </div>
+    </div>
+    <div class="s-panel">
+      <div class="ey-sm" style="margin-bottom:12px;">Compliance Framing — Language Rules</div>
+      <div class="grid2" style="margin-top:0;">
+        <div>
+          <div class="h3w" style="margin-bottom:8px;color:var(--green);">✅ Use This Language</div>
+          <div style="font-size:11px;color:#444;line-height:1.9;">"Register your interest"<br>"Join the waitlist"<br>"We'll be in touch"<br>"Connect with a practitioner"<br>"Learn more about our network"</div>
+        </div>
+        <div>
+          <div class="h3w" style="margin-bottom:8px;color:var(--red);">❌ Avoid This Language</div>
+          <div style="font-size:11px;color:#922;line-height:1.9;">"Book a consultation"<br>"Get your peptides"<br>"Start treatment today"<br>"Claim your spot"<br>"Limited availability — act now"</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HOMEPAGE -->
+<div class="pg" id="pg-home">
+  <div class="topbar"><div class="topbar-title">Homepage Wireframe — /</div><span class="chip chip-both">Both Audiences · Router</span></div>
+  <div class="shell">
+    <div class="ph"><div class="ey">Wireframe 01</div><h1>Homepage</h1><p>5 sections. Establishes trust, states mission, handles both audiences, routes to the right page. No clinical detail. No product mention.</p></div>
+    <div class="wf-card">
+
+      <div class="mock-nav">
+        <div class="mock-logo"></div>
+        <div class="mock-links"><div class="mock-link"></div><div class="mock-link"></div><div class="mock-link"></div></div>
+        <div class="mock-cta">Join the Network →</div>
+      </div>
+
+      <div class="trust-bar">
+        <div class="ti"><div class="ti-icon"></div>TGA-Registered Sponsor</div>
+        <div class="ti"><div class="ti-icon"></div>GMP-Verified Supply</div>
+        <div class="ti"><div class="ti-icon"></div>Pharmacist-Led Support</div>
+        <div class="ti"><div class="ti-icon"></div>SAS-B · Authorised Prescriber</div>
+        <div class="ti"><div class="ti-icon"></div>AHPRA Network</div>
+      </div>
+
+      <div class="ws ws-stone">
+        <div class="sec-tag">§1 — Hero</div>
+        <div class="ey-sm">Healthcare Infrastructure · Australia</div>
+        <div class="h1w" style="font-size:24px;max-width:540px;">Regulated Access to<br><em>Emerging Therapies.</em></div>
+        <div class="body-sm" style="margin-top:10px;">Revivum provides the infrastructure that connects patients and practitioners to lawful, GMP-quality peptide-based therapeutics in Australia — safely, compliantly, and with pharmacist-led clinical support.</div>
+        <div class="btns">
+          <div class="btn btn-primary">I'm a Patient →</div>
+          <div class="btn btn-outline">I'm a Practitioner →</div>
+        </div>
+        <div class="ann">↳ Each CTA routes to its respective page. Tracked as separate funnel entries. Both buttons equal weight — no visual hierarchy favouring one audience.</div>
+        <div class="comp-box" style="max-width:500px;">This website contains general health information only. It does not promote therapeutic goods or constitute medical advice. Always consult a registered healthcare practitioner.</div>
+      </div>
+
+      <div class="ws" style="background:#fff;">
+        <div class="sec-tag">§2 — Audience Router</div>
+        <div class="ey-sm">Who Is This For?</div>
+        <div class="split">
+          <div class="split-pt">
+            <div class="split-tag split-tag-p">For Patients</div>
+            <div class="h2w" style="font-size:14px;">Curious About Emerging Therapies?</div>
+            <div class="body-sm" style="max-width:none;">Learn what peptide-based therapies are and how to access them lawfully through a registered Australian practitioner.</div>
+            <div class="btns"><div class="btn btn-primary" style="font-size:8.5px;margin-top:8px;">Learn More →</div></div>
+          </div>
+          <div class="split-dr">
+            <div class="split-tag split-tag-dr">For Practitioners</div>
+            <div class="h2w" style="font-size:14px;">Ready to Expand Your Practice?</div>
+            <div class="body-sm" style="max-width:none;">Join our network and access GMP supply, TGA pathway support, and pharmacist-led clinical guidance.</div>
+            <div class="btns"><div class="btn btn-dr" style="font-size:8.5px;margin-top:8px;">Join the Network →</div></div>
+          </div>
+        </div>
+        <div class="ann">↳ These are the primary conversion points on the homepage. 2 sentences max per card. This module does the heavy lifting — don't over-explain below it.</div>
+      </div>
+
+      <div class="ws ws-stone">
+        <div class="sec-tag">§3 — What We Are</div>
+        <div class="ey-sm">Our Role</div>
+        <div class="h2w">We Are Infrastructure. Not a Clinic.</div>
+        <div class="body-sm" style="margin-bottom:14px;">Revivum operates as the regulated backbone behind compliant peptide prescribing in Australia. We don't treat patients — we support the practitioners who do.</div>
+        <div class="grid3">
+          <div class="gcard"><div class="gicon">📚</div><div class="h3w">Education</div><div class="body-sm" style="max-width:none;font-size:10px;">General health information for patients. Regulatory support for practitioners.</div></div>
+          <div class="gcard"><div class="gicon">🧭</div><div class="h3w">Navigation</div><div class="body-sm" style="max-width:none;font-size:10px;">Connecting curious patients with AHPRA-registered practitioners through a lawful pathway.</div></div>
+          <div class="gcard"><div class="gicon">🏭</div><div class="h3w">Supply</div><div class="body-sm" style="max-width:none;font-size:10px;">TGA-registered wholesale infrastructure. GMP-verified compounding supply for practitioners.</div></div>
+        </div>
+      </div>
+
+      <div class="ws ws-dark" style="padding:28px 24px;">
+        <div class="sec-tag" style="color:rgba(255,255,255,0.25);">§4 — Trust Band</div>
+        <div class="ey-white">Our Commitment</div>
+        <div class="h1w-white" style="font-size:18px;max-width:480px;">Compliance Is the Foundation.<br>Not an Afterthought.</div>
+        <div class="body-sm-white" style="margin-top:8px;">We operate within TGA regulations, AHPRA professional standards, and the SAS-B and Authorised Prescriber access pathways. Our infrastructure is built for a regulated world.</div>
+        <div class="btns"><div class="btn btn-outline-w" style="font-size:8.5px;">About Revivum →</div></div>
+      </div>
+
+      <div class="ws" style="background:var(--parchment);text-align:center;padding:32px 24px;">
+        <div class="sec-tag">§5 — Global CTA</div>
+        <div class="ey-sm" style="text-align:center;">Get Started</div>
+        <div class="h2w" style="text-align:center;">Patient or Practitioner — Start Here.</div>
+        <div class="btns" style="justify-content:center;margin-top:12px;">
+          <div class="btn btn-primary">I'm a Patient →</div>
+          <div class="btn btn-outline">I'm a Practitioner →</div>
+        </div>
+        <div class="ann" style="display:inline-block;margin-top:10px;">↳ Repeat of hero CTAs. Catches users who scrolled through without converting above.</div>
+      </div>
+
+      <div class="mock-footer">
+        <div><div class="fc-title">Revivum</div><div style="font-size:9px;color:rgba(255,255,255,0.35);line-height:1.7;margin-bottom:10px;">Healthcare infrastructure for compliant peptide therapeutics in Australia. TGA-Registered Sponsor. Not a clinic.</div><div class="fc-line" style="width:40%;"></div><div class="fc-line" style="width:30%;"></div></div>
+        <div><div class="fc-title">Navigate</div><div class="fc-line" style="width:60%;"></div><div class="fc-line" style="width:80%;"></div><div class="fc-line" style="width:50%;"></div><div class="fc-line" style="width:70%;"></div></div>
+        <div><div class="fc-title">Legal</div><div class="fc-line" style="width:70%;"></div><div class="fc-line" style="width:55%;"></div><div class="fc-line" style="width:65%;"></div></div>
+      </div>
+      <div class="disclaimer">⚠️ IMPORTANT: This website contains general health information only and does not constitute medical advice. Revivum does not advertise or promote therapeutic goods. Access to medicines requires a clinical consultation with a registered Australian healthcare practitioner. Revivum Pty Ltd — TGA Registered Sponsor. revivum.com.au</div>
+
+    </div>
+  </div>
+</div>
+
+<!-- PATIENT PAGE -->
+<div class="pg" id="pg-patient">
+  <div class="topbar"><div class="topbar-title">Patient Page — /patients</div><span class="chip chip-pt">Patients · Single Scrolling Page</span></div>
+  <div class="shell">
+    <div class="ph"><div class="ey">Wireframe 02 — Single Scrolling Page</div><h1>For Patients</h1><p>4 sections only. Curiosity → education → how it works (3 steps max) → register interest. No clinical detail, no product names, no eligibility framing.</p></div>
+    <div class="wf-card">
+
+      <div class="mock-nav"><div class="mock-logo"></div><div class="mock-links"><div class="mock-link"></div><div class="mock-link"></div><div class="mock-link"></div></div><div class="mock-cta">Join the Network →</div></div>
+
+      <div class="ws ws-green">
+        <div class="sec-tag">§1 — Hero</div>
+        <div class="ey-sm">For Patients · General Information</div>
+        <div class="h1w" style="font-size:22px;max-width:520px;">Understanding Peptide-Based Therapies in Australia.</div>
+        <div class="body-sm" style="margin-top:8px;">Peptide therapies are an emerging area of clinical interest. This page provides general, educational information to help you understand what they are and how lawful access works in Australia — through a registered healthcare practitioner.</div>
+        <div class="comp-box" style="max-width:480px;margin-top:12px;">This page is for general information only. It does not constitute medical advice and does not promote any therapeutic product. Individual suitability is determined by a registered practitioner.</div>
+      </div>
+
+      <div class="ws" style="background:#fff;">
+        <div class="sec-tag">§2 — Education</div>
+        <div class="ey-sm">General Health Information</div>
+        <div class="h2w">What Are Peptide Therapies?</div>
+        <div class="body-sm" style="margin-bottom:14px;">Peptides are short chains of amino acids that occur naturally in the body. They play a role in many biological processes. In clinical settings, certain peptide-based compounds are being explored as therapeutic options — and are available in Australia through regulated access pathways.</div>
+        <div class="grid3">
+          <div class="gcard"><div class="gicon">🧬</div><div class="h3w">Naturally Occurring</div><div class="body-sm" style="max-width:none;font-size:10px;">Peptides are found throughout the body. Insulin is one of the most well-known peptide-based medicines.</div></div>
+          <div class="gcard"><div class="gicon">🔭</div><div class="h3w">An Evolving Field</div><div class="body-sm" style="max-width:none;font-size:10px;">Peptide therapeutics represent a growing area of clinical research and medical interest globally.</div></div>
+          <div class="gcard"><div class="gicon">🏥</div><div class="h3w">Regulated Access</div><div class="body-sm" style="max-width:none;font-size:10px;">In Australia, certain peptide therapies are accessed via the TGA's SAS-B or Authorised Prescriber pathways — through a registered doctor.</div></div>
+        </div>
+        <div class="ann">↳ Keep this section high-level. No product names. No research citations that could be read as efficacy claims. Less copy is more compliant here.</div>
+      </div>
+
+      <div class="ws ws-stone">
+        <div class="sec-tag">§3 — How It Works (3 Steps Max)</div>
+        <div class="ey-sm">The Process</div>
+        <div class="h2w">How Does Lawful Access Work?</div>
+        <div class="body-sm">Three simple steps — all involving a registered Australian practitioner.</div>
+        <div class="steps" style="margin-top:20px;">
+          <div class="step"><div class="step-n">1</div><div class="step-l">Register Your Interest</div><div class="step-s">Submit your details below. Our team reviews your enquiry.</div></div>
+          <div class="step"><div class="step-n">2</div><div class="step-l">Speak to a Practitioner</div><div class="step-s">We connect you with a registered doctor in our network for a clinical consultation.</div></div>
+          <div class="step"><div class="step-n">3</div><div class="step-l">Lawful, Supported Access</div><div class="step-s">If suitable, your doctor manages prescribing and supply through regulated channels.</div></div>
+        </div>
+        <div class="ann">↳ This is the entire patient-facing journey at Phase 1. 3 steps is all that's needed — and all that's compliant.</div>
+      </div>
+
+      <div class="ws" style="background:var(--parchment);">
+        <div class="sec-tag">§4 — Lead Capture</div>
+        <div class="ey-sm" style="color:var(--label-p);">Register Your Interest</div>
+        <div class="h2w">Ready to Learn More?</div>
+        <div class="body-sm" style="margin-bottom:16px;">Submit your details and a member of our team will be in touch to guide you through your next steps — with no obligation.</div>
+        <div style="max-width:480px;">
+          <div class="wf-form">
+            <div class="ff-row"><div class="ff">First Name *</div><div class="ff">Last Name *</div></div>
+            <div class="ff-row"><div class="ff">Email Address *</div></div>
+            <div class="ff-row"><div class="ff">Phone Number *</div></div>
+            <div class="ff-row"><div class="ff">State / Territory *</div></div>
+            <div class="ff-row"><div class="ff tall">Anything you'd like us to know? (optional)</div></div>
+          </div>
+          <div style="background:var(--bg-p);border:1px solid #B8D9C4;border-radius:4px;padding:10px 12px;font-size:9.5px;color:var(--label-p);margin:10px 0 14px;line-height:1.7;">☑ By submitting this form, I confirm I am seeking general information only. I understand that Revivum is not a medical provider and that any clinical decisions will be made by a registered healthcare practitioner. I consent to being contacted by a member of the Revivum team.</div>
+          <div class="btn btn-primary">Register My Interest →</div>
+        </div>
+      </div>
+
+      <div class="mock-footer"><div><div class="fc-title">Revivum</div><div style="font-size:9px;color:rgba(255,255,255,0.3);line-height:1.7;">TGA-Registered Sponsor. Healthcare infrastructure, not a clinic.</div></div><div><div class="fc-title">Pages</div><div class="fc-line" style="width:55%;"></div><div class="fc-line" style="width:70%;"></div><div class="fc-line" style="width:60%;"></div></div><div><div class="fc-title">Legal</div><div class="fc-line" style="width:70%;"></div><div class="fc-line" style="width:55%;"></div></div></div>
+      <div class="disclaimer">⚠️ General health information only. Does not constitute medical advice. Consult a registered Australian healthcare practitioner before making any health decisions.</div>
+
+    </div>
+  </div>
+</div>
+
+<!-- PRACTITIONER PAGE -->
+<div class="pg" id="pg-doctor">
+  <div class="topbar"><div class="topbar-title">Practitioner Page — /practitioners</div><span class="chip chip-dr">Practitioners · Single Scrolling Page</span></div>
+  <div class="shell">
+    <div class="ph"><div class="ey">Wireframe 03 — Single Scrolling Page</div><h1>For Practitioners</h1><p>4 sections. Why Revivum → what we provide → credentials → sign-up. Clinical tone. Peer-to-peer credibility. Low friction conversion.</p></div>
+    <div class="wf-card">
+
+      <div class="mock-nav"><div class="mock-logo"></div><div class="mock-links"><div class="mock-link"></div><div class="mock-link"></div><div class="mock-link"></div></div><div class="mock-cta">Join the Network →</div></div>
+
+      <div class="ws ws-dark" style="padding:36px 24px;">
+        <div class="sec-tag" style="color:rgba(255,255,255,0.25);">§1 — Hero</div>
+        <div class="ey-white">For AHPRA-Registered Practitioners</div>
+        <div class="h1w-white" style="font-size:22px;max-width:520px;">The Infrastructure Behind<br>Compliant Peptide Prescribing.</div>
+        <div class="body-sm-white" style="margin-top:10px;">Revivum is a TGA-registered wholesale infrastructure provider. We give Australian practitioners the supply reliability, regulatory framework, and pharmacist-led support needed to prescribe peptide therapeutics with confidence.</div>
+        <div class="btns" style="margin-top:16px;">
+          <div class="btn btn-white" style="font-size:9px;">Apply to Join →</div>
+          <div class="btn btn-outline-w" style="font-size:9px;">What We Provide ↓</div>
+        </div>
+        <div class="ann" style="border-left-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.3);margin-top:14px;">↳ Tone: clinical, credible, peer-to-peer. This is a B2B infrastructure proposition. Practitioners respond to precision, not hype. "Apply to Join" scrolls to form.</div>
+      </div>
+
+      <div class="ws" style="background:#fff;">
+        <div class="sec-tag">§2 — Value Proposition</div>
+        <div class="ey-sm">What We Provide</div>
+        <div class="h2w">Everything You Need. Simply Delivered.</div>
+        <div class="grid2" style="margin-top:14px;">
+          <div class="gcard-white" style="border-left:3px solid var(--moss);"><div class="gicon">📦</div><div class="h3w">GMP Supply Chain</div><div class="body-sm" style="max-width:none;">Pharmaceutical-grade finished goods. Verified compounding partners. Consistent, reliable availability.</div></div>
+          <div class="gcard-white" style="border-left:3px solid var(--moss);"><div class="gicon">📋</div><div class="h3w">TGA Pathway Support</div><div class="body-sm" style="max-width:none;">SAS-B notification and Authorised Prescriber application support. Compliance documentation and templates.</div></div>
+          <div class="gcard-white" style="border-left:3px solid var(--moss);"><div class="gicon">💊</div><div class="h3w">Pharmacist-Led Guidance</div><div class="body-sm" style="max-width:none;">Direct access to our clinical pharmacist team. Dosing support, product queries, and complex case guidance.</div></div>
+          <div class="gcard-white" style="border-left:3px solid var(--moss);"><div class="gicon">📡</div><div class="h3w">Patient Referral Flow</div><div class="body-sm" style="max-width:none;">Network-listed practitioners receive pre-educated patient enquiries via our patient-facing pathway.</div></div>
+        </div>
+        <div class="ann">↳ 4 cards max at Phase 1. No portal mention, no CME portal. Infrastructure credibility only. Expand in Phase 2.</div>
+      </div>
+
+      <div class="ws ws-stone">
+        <div class="sec-tag">§3 — Credentials</div>
+        <div class="ey-sm">Our Credentials</div>
+        <div class="h2w">Built on Regulatory Foundations</div>
+        <div class="grid3" style="margin-top:14px;">
+          <div style="background:#fff;border:1px solid var(--rule);border-radius:6px;padding:14px;"><div style="font-size:10px;font-weight:700;color:var(--ink);margin-bottom:4px;">TGA Registered Sponsor</div><div style="font-size:9.5px;color:var(--muted);line-height:1.5;">Registered under the Therapeutic Goods Act 1989 to supply therapeutic goods in Australia.</div></div>
+          <div style="background:#fff;border:1px solid var(--rule);border-radius:6px;padding:14px;"><div style="font-size:10px;font-weight:700;color:var(--ink);margin-bottom:4px;">GMP Manufacturing</div><div style="font-size:9.5px;color:var(--muted);line-height:1.5;">All products sourced from GMP-compliant facilities. Quality documentation available on request.</div></div>
+          <div style="background:#fff;border:1px solid var(--rule);border-radius:6px;padding:14px;"><div style="font-size:10px;font-weight:700;color:var(--ink);margin-bottom:4px;">SAS-B & AP Pathways</div><div style="font-size:9.5px;color:var(--muted);line-height:1.5;">Full operational infrastructure for both TGA unapproved medicine access pathways.</div></div>
+        </div>
+      </div>
+
+      <div class="ws" style="background:var(--parchment);">
+        <div class="sec-tag">§4 — Sign-Up</div>
+        <div class="ey-sm" style="color:var(--label-dr);">Apply to Join</div>
+        <div class="h2w">Join the Revivum Practitioner Network</div>
+        <div class="body-sm" style="margin-bottom:16px;">Membership is free. AHPRA verification required. We'll be in touch within 48 hours.</div>
+        <div style="max-width:480px;">
+          <div class="wf-form">
+            <div class="ff-row"><div class="ff">First Name *</div><div class="ff">Last Name *</div></div>
+            <div class="ff-row"><div class="ff">AHPRA Registration Number *</div></div>
+            <div class="ff-row"><div class="ff">Medical Specialty *</div><div class="ff">State / Territory *</div></div>
+            <div class="ff-row"><div class="ff">Work Email Address *</div></div>
+            <div class="ff-row"><div class="ff">Practice / Clinic Name (optional)</div></div>
+          </div>
+          <div style="background:var(--bg-dr);border:1px solid #B8C4D9;border-radius:4px;padding:10px 12px;font-size:9.5px;color:#2C3E6B;margin:10px 0 14px;line-height:1.7;">☑ I confirm I am currently registered with AHPRA and authorised to practice medicine in Australia.<br>☑ I understand access to Revivum's network and supply infrastructure is for registered healthcare professionals only.<br>☐ I consent to receiving clinical updates and network communications from Revivum (optional).</div>
+          <div class="btn btn-dr">Apply to Join the Network →</div>
+          <div class="ann" style="margin-top:10px;">↳ On submit: confirmation screen + email. AHPRA manually verified at Phase 1. No automated portal. Account provisioned within 48hrs.</div>
+        </div>
+      </div>
+
+      <div class="mock-footer"><div><div class="fc-title">Revivum</div><div style="font-size:9px;color:rgba(255,255,255,0.3);line-height:1.7;">TGA-Registered Sponsor. Healthcare infrastructure, not a clinic.</div></div><div><div class="fc-title">Pages</div><div class="fc-line" style="width:55%;"></div><div class="fc-line" style="width:70%;"></div><div class="fc-line" style="width:60%;"></div></div><div><div class="fc-title">Legal</div><div class="fc-line" style="width:70%;"></div><div class="fc-line" style="width:55%;"></div></div></div>
+      <div class="disclaimer">⚠️ This page is intended for registered healthcare professionals only. Nothing on this page constitutes medical advice or promotes therapeutic goods. Revivum Pty Ltd — TGA Registered Sponsor.</div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="pg" id="pg-about">
+  <div class="topbar"><div class="topbar-title">About Page — /about (Optional)</div><span class="chip chip-both">Optional at Phase 1</span></div>
+  <div class="shell">
+    <div class="ph"><div class="ey">Wireframe 04 — Optional</div><h1>About Revivum</h1><p>3 sections only: mission statement, what we are (not a clinic), credentials. No team photos needed at Phase 1. Short, factual, credible.</p></div>
+    <div class="wf-card">
+
+      <div class="mock-nav"><div class="mock-logo"></div><div class="mock-links"><div class="mock-link"></div><div class="mock-link"></div><div class="mock-link"></div></div><div class="mock-cta">Join the Network →</div></div>
+
+      <div class="ws ws-stone">
+        <div class="sec-tag">§1 — Mission</div>
+        <div class="ey-sm">About Us</div>
+        <div class="h1w" style="max-width:560px;">Infrastructure for Responsible Innovation in Australian Healthcare.</div>
+        <div class="body-sm" style="margin-top:10px;">Revivum is a TGA-registered sponsor and healthcare infrastructure company. We are not a clinic, not a pharmacy, and not a direct-to-consumer service. We build the regulated supply and support layer that makes lawful access to emerging peptide therapeutics possible for Australian practitioners and their patients.</div>
+      </div>
+
+      <div class="ws" style="background:#fff;">
+        <div class="sec-tag">§2 — Our Role</div>
+        <div class="ey-sm">What We Do</div>
+        <div class="h2w">Three Roles. One Purpose.</div>
+        <div class="grid3" style="margin-top:14px;">
+          <div class="gcard"><div class="gicon">📚</div><div class="h3w">Education Layer</div><div class="body-sm" style="max-width:none;font-size:10px;">General health information for patients. Clinical and regulatory support for practitioners.</div></div>
+          <div class="gcard"><div class="gicon">🧭</div><div class="h3w">Navigation Layer</div><div class="body-sm" style="max-width:none;font-size:10px;">Connecting patients with registered practitioners through a lawful access pathway.</div></div>
+          <div class="gcard"><div class="gicon">🏭</div><div class="h3w">Supply Infrastructure</div><div class="body-sm" style="max-width:none;font-size:10px;">TGA-registered wholesale distribution. GMP-verified product supply for qualified prescribers.</div></div>
+        </div>
+      </div>
+
+      <div class="ws ws-dark" style="padding:28px 24px;">
+        <div class="sec-tag" style="color:rgba(255,255,255,0.2);">§3 — Credentials + CTA</div>
+        <div class="ey-white">Regulatory Standing</div>
+        <div class="h1w-white" style="font-size:17px;max-width:480px;margin-bottom:16px;">Built Within the Framework. Always.</div>
+        <div class="grid3">
+          <div style="padding:14px;background:rgba(255,255,255,0.06);border-radius:6px;border:1px solid rgba(255,255,255,0.08);"><div style="font-size:10px;font-weight:600;color:#fff;margin-bottom:4px;">TGA Registered Sponsor</div><div style="font-size:9px;color:rgba(255,255,255,0.4);line-height:1.5;">Sponsor ID: [To be inserted]</div></div>
+          <div style="padding:14px;background:rgba(255,255,255,0.06);border-radius:6px;border:1px solid rgba(255,255,255,0.08);"><div style="font-size:10px;font-weight:600;color:#fff;margin-bottom:4px;">GMP-Verified Supply</div><div style="font-size:9px;color:rgba(255,255,255,0.4);line-height:1.5;">GMP-compliant manufacturing</div></div>
+          <div style="padding:14px;background:rgba(255,255,255,0.06);border-radius:6px;border:1px solid rgba(255,255,255,0.08);"><div style="font-size:10px;font-weight:600;color:#fff;margin-bottom:4px;">Pharmacist-Led Team</div><div style="font-size:9px;color:rgba(255,255,255,0.4);line-height:1.5;">Clinical pharmacist support for network practitioners</div></div>
+        </div>
+        <div class="btns" style="margin-top:18px;">
+          <div class="btn btn-white" style="font-size:9px;">For Patients →</div>
+          <div class="btn btn-outline-w" style="font-size:9px;">For Practitioners →</div>
+        </div>
+      </div>
+
+      <div class="mock-footer"><div><div class="fc-title">Revivum</div><div style="font-size:9px;color:rgba(255,255,255,0.3);line-height:1.7;">TGA-Registered Sponsor. Healthcare infrastructure, not a clinic.</div></div><div><div class="fc-title">Pages</div><div class="fc-line" style="width:55%;"></div><div class="fc-line" style="width:70%;"></div><div class="fc-line" style="width:60%;"></div></div><div><div class="fc-title">Legal</div><div class="fc-line" style="width:70%;"></div><div class="fc-line" style="width:55%;"></div></div></div>
+      <div class="disclaimer">⚠️ This website contains general information only. Revivum Pty Ltd is a TGA-registered sponsor and does not provide medical advice or promote therapeutic goods. revivum.com.au</div>
+
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+function go(id, el) {
+  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(n=>n.classList.remove('active'));
+  document.getElementById('pg-'+id).classList.add('active');
+  document.getElementById('main').scrollTop=0;
+  if(el) el.classList.add('active');
+}
+</script>
+</body>
+</html>
