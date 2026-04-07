@@ -1,0 +1,39 @@
+---
+/*
+ * Footer — three columns: nav, contact, legal.
+ * Copy is placeholder; once Ghost _settings page is wired, contact details
+ * pull from there instead of being hard-coded.
+ */
+---
+
+<footer class="bg-neutral text-neutral-content/80 border-t border-white/5">
+  <div class="mx-auto max-w-6xl px-6 py-12 grid gap-10 md:grid-cols-3 text-sm">
+    <div>
+      <div class="font-serif text-lg text-white">Revivum</div>
+      <p class="mt-3 text-white/50 leading-relaxed text-[13px]">
+        Australian peptide therapeutics infrastructure. Connecting patients and practitioners to lawful, regulated therapies.
+      </p>
+    </div>
+
+    <div>
+      <div class="font-mono text-[10px] text-[color:var(--color-moss-lt)] mb-3">NAVIGATE</div>
+      <ul class="space-y-2 text-white/60">
+        <li><a href="/patients/" class="hover:text-white">For Patients</a></li>
+        <li><a href="/practitioners/" class="hover:text-white">For Practitioners</a></li>
+        <li><a href="/about/" class="hover:text-white">About</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-mono text-[10px] text-[color:var(--color-moss-lt)] mb-3">LEGAL</div>
+      <ul class="space-y-2 text-white/60">
+        <li><a href="/privacy/" class="hover:text-white">Privacy Policy</a></li>
+        <li><a href="/terms/" class="hover:text-white">Terms of Use</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-white/5 py-5 text-center text-[11px] text-white/35 font-mono tracking-wider">
+    © {new Date().getFullYear()} REVIVUM PTY LTD
+  </div>
+</footer>

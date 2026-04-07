@@ -1,0 +1,23 @@
+---
+/*
+ * Homepage — placeholder shell while homepage components are built in Task #5.
+ * Currently proves the layout, tokens, fonts, and DaisyUI theme all render correctly.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Home">
+  <section class="mx-auto max-w-4xl px-6 py-24">
+    <div class="font-mono text-[10px] tracking-widest text-primary mb-3">SCAFFOLD OK</div>
+    <h1 class="font-serif text-4xl md:text-5xl leading-tight mb-6">
+      Peptide therapeutics infrastructure for Australia.
+    </h1>
+    <p class="text-base text-[color:var(--color-muted)] max-w-2xl leading-relaxed mb-8">
+      Revivum is a TGA-Registered Sponsor connecting patients and practitioners to lawful peptide-based therapies. Not a clinic. Infrastructure.
+    </p>
+    <div class="flex flex-wrap gap-3">
+      <a href="/patients/" class="btn btn-primary font-mono text-[11px] tracking-wider">FOR PATIENTS</a>
+      <a href="/practitioners/" class="btn btn-outline font-mono text-[11px] tracking-wider">FOR PRACTITIONERS</a>
+    </div>
+  </section>
+</BaseLayout>

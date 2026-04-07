@@ -1,0 +1,24 @@
+---
+/*
+ * TgaDisclaimer — global compliance notice.
+ * Ships on every page per the project brief's TGA compliance requirements.
+ * The disclaimer COPY should be editable via the Ghost _settings page;
+ * the POSITION (above the footer) is fixed.
+ *
+ * TODO: when Ghost is wired, pull `tga_disclaimer` from _settings.
+ */
+const disclaimer = 'Revivum is a TGA-Registered Sponsor and not a clinic. Information on this site is for educational purposes only and does not constitute medical advice. All content should be reviewed with your healthcare practitioner. No promotional claims about therapeutic goods are made on this site.';
+---
+
+<aside
+  role="note"
+  aria-label="Regulatory disclaimer"
+  class="bg-[color:var(--color-parchment)] border-y border-[color:var(--color-rule)]"
+>
+  <div class="mx-auto max-w-6xl px-6 py-4 flex items-start gap-3 text-xs text-[color:var(--color-muted)] leading-relaxed">
+    <span class="font-mono text-[9px] uppercase tracking-widest text-[color:var(--color-amber)] shrink-0 mt-0.5">
+      DISCLAIMER
+    </span>
+    <p>{disclaimer}</p>
+  </div>
+</aside>

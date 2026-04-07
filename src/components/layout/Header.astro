@@ -1,0 +1,50 @@
+---
+/*
+ * Header — top navigation bar.
+ * Structure mirrors the wireframe mock-nav: logo left, links centre-right, CTA far right.
+ * Mobile: hamburger toggles a dropdown via DaisyUI's `drawer` pattern or a simple
+ * `details`/`summary` for zero JS. We use `details` for simplicity.
+ */
+const navLinks = [
+  { href: '/patients/', label: 'For Patients' },
+  { href: '/practitioners/', label: 'For Practitioners' },
+  { href: '/about/', label: 'About' },
+];
+---
+
+<header class="bg-neutral text-neutral-content border-b border-white/10">
+  <div class="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
+    <a href="/" class="font-serif text-xl tracking-wide">
+      Revivum
+      <span class="block text-[9px] font-mono text-[color:var(--color-moss-lt)] mt-0.5">TGA-REGISTERED SPONSOR</span>
+    </a>
+
+    <nav class="hidden md:flex items-center gap-8">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class="text-sm text-white/70 hover:text-white transition-colors"
+        >
+          {link.label}
+        </a>
+      ))}
+      <a href="/patients/#contact" class="btn btn-primary btn-sm font-mono text-[10px] tracking-wider">
+        CONTACT
+      </a>
+    </nav>
+
+    <details class="md:hidden dropdown dropdown-end">
+      <summary class="btn btn-ghost btn-sm text-white list-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </summary>
+      <ul class="menu dropdown-content mt-3 z-10 p-3 shadow-lg bg-neutral rounded-box w-52">
+        {navLinks.map((link) => (
+          <li><a href={link.href} class="text-white/80">{link.label}</a></li>
+        ))}
+        <li><a href="/patients/#contact" class="text-primary-content bg-primary">Contact</a></li>
+      </ul>
+    </details>
+  </div>
+</header>
