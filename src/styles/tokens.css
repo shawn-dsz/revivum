@@ -1,0 +1,23 @@
+/*
+ * Revivum design tokens — direct port from revivum-mvp-wireframe.html.
+ * These are referenced by components that need raw hex values outside
+ * DaisyUI's semantic scale (e.g. the split audience cards which use
+ * dedicated patient/practitioner background tones).
+ */
+:root {
+  --color-ink:        #0F1A14;
+  --color-moss:       #3A5C47;
+  --color-moss-lt:    #5A7D69;
+  --color-fog:        #F4F1EC;
+  --color-parchment:  #EDE8DF;
+  --color-white:      #FAFAF8;
+  --color-rule:       #D9D4CC;
+  --color-muted:      #8A8478;
+  --color-label-p:    #2E5C48;
+  --color-label-dr:   #2C3E6B;
+  --color-bg-p:       #EAF2EC;
+  --color-bg-dr:      #EAEEF6;
+  --color-amber:      #B87333;
+  --color-red:        #992222;
+  --color-green:      #2E6B3E;
+}

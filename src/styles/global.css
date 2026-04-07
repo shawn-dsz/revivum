@@ -1,0 +1,82 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: revivum --default;
+}
+
+@import "./tokens.css";
+
+/*
+ * DaisyUI v5 custom theme — maps wireframe palette to DaisyUI semantic tokens.
+ * Using @plugin "daisyui/theme" with CSS variables per v5 conventions.
+ */
+@plugin "daisyui/theme" {
+  name: "revivum";
+  default: true;
+  prefersdark: false;
+  color-scheme: light;
+
+  --color-base-100: #F4F1EC;   /* fog */
+  --color-base-200: #EDE8DF;   /* parchment */
+  --color-base-300: #D9D4CC;   /* rule */
+  --color-base-content: #0F1A14; /* ink */
+
+  --color-primary: #3A5C47;    /* moss */
+  --color-primary-content: #FAFAF8;
+
+  --color-secondary: #2C3E6B;  /* label-dr (practitioner accent) */
+  --color-secondary-content: #FAFAF8;
+
+  --color-accent: #B87333;     /* amber */
+  --color-accent-content: #0F1A14;
+
+  --color-neutral: #0F1A14;    /* ink */
+  --color-neutral-content: #FAFAF8;
+
+  --color-info: #2C3E6B;
+  --color-success: #2E6B3E;
+  --color-warning: #B87333;
+  --color-error: #992222;
+
+  --radius-selector: 0.25rem;
+  --radius-field: 0.25rem;
+  --radius-box: 0.625rem;
+
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+/* Global typography defaults matching the wireframe. */
+:root {
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Courier Prime', 'Courier New', monospace;
+}
+
+html {
+  font-family: var(--font-sans);
+  background: var(--color-ink);
+  color: var(--color-white);
+}
+
+body {
+  background: var(--color-fog);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, .font-serif {
+  font-family: var(--font-serif);
+  color: var(--color-ink);
+}
+
+.font-mono, .eyebrow {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
