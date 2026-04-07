@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PatientHero from '../components/patients/PatientHero.astro';
+import WhatArePeptides from '../components/patients/WhatArePeptides.astro';
+import HowItWorks from '../components/patients/HowItWorks.astro';
+import PatientLeadForm from '../components/patients/PatientLeadForm.astro';
+import { getPage } from '../lib/ghost';
+
+const page = await getPage('patients');
+---
+
+<BaseLayout title="For Patients" description={page?.meta_description ?? undefined}>
+  <PatientHero page={page} />
+  <WhatArePeptides />
+  <HowItWorks />
+  <PatientLeadForm />
+</BaseLayout>

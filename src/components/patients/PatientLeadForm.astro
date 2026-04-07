@@ -1,0 +1,232 @@
+---
+// No Ghost props — this section is fully static.
+---
+
+<section id="contact" class="bg-[color:var(--color-parchment)]">
+  <div class="mx-auto max-w-4xl px-6 py-16 md:py-24">
+    <p class="font-mono eyebrow text-xs tracking-widest uppercase text-[color:var(--color-label-p)] mb-4">
+      Register Your Interest
+    </p>
+    <h2 class="font-serif text-2xl md:text-3xl leading-snug text-[color:var(--color-ink)] mb-4 max-w-xl">
+      Ready to Learn More?
+    </h2>
+    <p class="text-base text-[color:var(--color-muted)] leading-relaxed max-w-2xl mb-10">
+      Submit your details and a member of our team will be in touch to guide you through your next steps &mdash; with
+      no obligation.
+    </p>
+
+    <div id="form-success" class="hidden">
+      <div role="alert" class="alert alert-success max-w-lg">
+        <span>Thanks &mdash; we&rsquo;ll be in touch shortly.</span>
+      </div>
+    </div>
+
+    <div id="form-error" class="hidden mb-6">
+      <div role="alert" class="alert alert-error max-w-lg">
+        <span>Something went wrong. Please try again or email us directly.</span>
+      </div>
+    </div>
+
+    <form id="patient-lead-form" novalidate class="max-w-lg flex flex-col gap-5">
+      <!-- First Name + Last Name row -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div class="form-control">
+          <label class="label" for="first_name">
+            <span class="label-text">First Name</span>
+          </label>
+          <input
+            id="first_name"
+            name="first_name"
+            type="text"
+            class="input input-bordered"
+            autocomplete="given-name"
+          />
+          <p id="error-first_name" class="mt-1 text-xs text-[color:var(--color-red)] hidden"></p>
+        </div>
+        <div class="form-control">
+          <label class="label" for="last_name">
+            <span class="label-text">Last Name</span>
+          </label>
+          <input
+            id="last_name"
+            name="last_name"
+            type="text"
+            class="input input-bordered"
+            autocomplete="family-name"
+          />
+          <p id="error-last_name" class="mt-1 text-xs text-[color:var(--color-red)] hidden"></p>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="form-control">
+        <label class="label" for="email">
+          <span class="label-text">Email Address</span>
+        </label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          class="input input-bordered"
+          autocomplete="email"
+        />
+        <p id="error-email" class="mt-1 text-xs text-[color:var(--color-red)] hidden"></p>
+      </div>
+
+      <!-- Phone -->
+      <div class="form-control">
+        <label class="label" for="phone">
+          <span class="label-text">Phone Number</span>
+        </label>
+        <input
+          id="phone"
+          name="phone"
+          type="tel"
+          class="input input-bordered"
+          autocomplete="tel"
+        />
+        <p id="error-phone" class="mt-1 text-xs text-[color:var(--color-red)] hidden"></p>
+      </div>
+
+      <!-- State -->
+      <div class="form-control">
+        <label class="label" for="state">
+          <span class="label-text">State / Territory</span>
+        </label>
+        <select id="state" name="state" class="select select-bordered">
+          <option value="">Select state&hellip;</option>
+          <option value="VIC">VIC</option>
+          <option value="NSW">NSW</option>
+          <option value="QLD">QLD</option>
+          <option value="WA">WA</option>
+          <option value="SA">SA</option>
+          <option value="TAS">TAS</option>
+          <option value="ACT">ACT</option>
+          <option value="NT">NT</option>
+        </select>
+        <p id="error-state" class="mt-1 text-xs text-[color:var(--color-red)] hidden"></p>
+      </div>
+
+      <!-- Message (optional) -->
+      <div class="form-control">
+        <label class="label" for="message">
+          <span class="label-text">Anything you&rsquo;d like us to know? <span class="text-[color:var(--color-muted)]">(optional)</span></span>
+        </label>
+        <textarea
+          id="message"
+          name="message"
+          rows="4"
+          class="textarea textarea-bordered"
+        ></textarea>
+      </div>
+
+      <!-- Consent checkbox -->
+      <div class="form-control">
+        <label class="label cursor-pointer items-start gap-3">
+          <input
+            id="consent"
+            name="consent"
+            type="checkbox"
+            class="checkbox checkbox-primary mt-0.5 shrink-0"
+          />
+          <span class="label-text leading-relaxed text-sm text-[color:var(--color-muted)]">
+            By submitting this form, I confirm I am seeking general information only. I understand that Revivum is
+            not a medical provider and that any clinical decisions will be made by a registered healthcare
+            practitioner. I consent to being contacted by a member of the Revivum team.
+          </span>
+        </label>
+        <p id="error-consent" class="mt-1 text-xs text-[color:var(--color-red)] hidden"></p>
+      </div>
+
+      <div>
+        <button type="submit" class="btn btn-primary font-mono text-[11px] tracking-wider">
+          Register My Interest &rarr;
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('patient-lead-form') as HTMLFormElement | null;
+  const formSuccess = document.getElementById('form-success') as HTMLElement | null;
+  const formError = document.getElementById('form-error') as HTMLElement | null;
+
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Clear previous errors
+      form.querySelectorAll('[id^="error-"]').forEach((el) => {
+        el.textContent = '';
+        el.classList.add('hidden');
+      });
+      formError?.classList.add('hidden');
+
+      const data = new FormData(form);
+      const firstName = (data.get('first_name') as string).trim();
+      const lastName = (data.get('last_name') as string).trim();
+      const email = (data.get('email') as string).trim();
+      const phone = (data.get('phone') as string).trim();
+      const state = (data.get('state') as string).trim();
+      const message = (data.get('message') as string).trim();
+      const consent = (form.querySelector('#consent') as HTMLInputElement).checked;
+
+      let valid = true;
+
+      function showError(fieldId: string, msg: string) {
+        const el = document.getElementById(`error-${fieldId}`);
+        if (el) {
+          el.textContent = msg;
+          el.classList.remove('hidden');
+        }
+        valid = false;
+      }
+
+      if (!firstName) showError('first_name', 'First name is required.');
+      if (!lastName) showError('last_name', 'Last name is required.');
+      if (!email) {
+        showError('email', 'Email address is required.');
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showError('email', 'Please enter a valid email address.');
+      }
+      if (!phone) {
+        showError('phone', 'Phone number is required.');
+      } else if (phone.replace(/\D/g, '').length < 8) {
+        showError('phone', 'Please enter a valid phone number (at least 8 digits).');
+      }
+      if (!state) showError('state', 'Please select your state or territory.');
+      if (!consent) showError('consent', 'You must confirm consent to proceed.');
+
+      if (!valid) return;
+
+      const payload = {
+        kind: 'patient',
+        first_name: firstName,
+        last_name: lastName,
+        email,
+        phone,
+        state,
+        message,
+        consent: true,
+      };
+
+      try {
+        const res = await fetch('/api/leads', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        if (res.ok) {
+          form.classList.add('hidden');
+          formSuccess?.classList.remove('hidden');
+        } else {
+          formError?.classList.remove('hidden');
+        }
+      } catch {
+        formError?.classList.remove('hidden');
+      }
+    });
+  }
+</script>

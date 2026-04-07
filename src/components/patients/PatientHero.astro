@@ -1,0 +1,34 @@
+---
+import type { GhostPage } from '../../lib/ghost';
+
+interface Props {
+  page: GhostPage | null;
+}
+
+const { page } = Astro.props;
+
+const headline = page?.title ?? 'Understanding Peptide-Based Therapies in Australia.';
+const body =
+  page?.excerpt ??
+  'Peptide therapies are an emerging area of clinical interest. This page provides general, educational information to help you understand what they are and how lawful access works in Australia \u2014 through a registered healthcare practitioner.';
+---
+
+<section class="bg-[color:var(--color-bg-p)]">
+  <div class="mx-auto max-w-4xl px-6 py-16 md:py-24">
+    <p class="font-mono eyebrow text-xs tracking-widest uppercase text-[color:var(--color-label-p)] mb-4">
+      For Patients &middot; General Information
+    </p>
+    <h1 class="font-serif text-4xl md:text-5xl leading-tight mb-6 text-[color:var(--color-ink)] max-w-2xl">
+      {headline}
+    </h1>
+    <p class="text-base text-[color:var(--color-muted)] max-w-2xl leading-relaxed mb-8">
+      {body}
+    </p>
+    <div class="max-w-lg border border-[color:var(--color-rule)] rounded-lg px-5 py-4 bg-[color:var(--color-fog)]">
+      <p class="text-sm text-[color:var(--color-muted)] leading-relaxed">
+        This page is for general information only. It does not constitute medical advice and does not promote any
+        therapeutic product. Individual suitability is determined by a registered practitioner.
+      </p>
+    </div>
+  </div>
+</section>
